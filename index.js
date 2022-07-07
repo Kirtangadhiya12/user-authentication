@@ -7,7 +7,7 @@ dotenv.config();
 const PORT=process.env.PORT;
 const url = process.env.url;
 
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: true}));
 
 mongoose.connect(url,{useNewUrlParser:true})
 const con=mongoose.connection
