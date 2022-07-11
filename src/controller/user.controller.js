@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const { successResponse, errorResponse } = require("../helper/index");
 
 exports.registerUser = async (req, res) => {
-  const emailExist = await User.findOne({ email: req.body.email });
+  const emailExist = await User.exists({ email: req.body.email });
   if (emailExist) return errorResponse(req, res, "Email already exist", 404);
 
   const hashedPassword = await bcrypt.hash(req.body.password, 10);

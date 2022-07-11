@@ -1,20 +1,12 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const app = express();
 const dotenv = require("dotenv");
 const userRoute = require("./src/routes/users");
 dotenv.config();
+require("./src/config/connection");
 const PORT = process.env.PORT;
-const url = process.env.url;
-
+app.use(express.static(`${__dirname}/uploads`));
 app.use(express.urlencoded({ extended: true }));
-
-mongoose.connect(url, { useNewUrlParser: true });
-const con = mongoose.connection;
-
-con.on("open", () => {
-  console.log("Database is Connected..");
-});
 
 app.use(express.json());
 app.use("/user", userRoute);
